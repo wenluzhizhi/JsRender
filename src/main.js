@@ -1,41 +1,44 @@
-import {Transform} from './transform'
+//import {Transform} from './transform'
+import {Renderer} from './renderer';
+import {Camera} from './camera';
+import {Scene} from './scene';
+import {Mesh} from './mesh';
 
 class App {
   constructor (){
     console.log('this is App constructor!');
+    console.log(Renderer)
     this.canvas = document.getElementById('canvas');
-    console.log(this.canvas);
-    this.ctx = this.canvas.getContext('2d');
+    this.renderer = new Renderer(this.canvas);
+    this.scene = new Scene();
 
-    this.canvasWidth = this.canvas.width;
-    this.canvasHeight = this.canvas.height;
+    this.cameraFov = 60;
+    this.nearPlane = 1;
+    this.farPlane = 100;
+    this.aspect = 1;
+    this.camera = new Camera(this.cameraFov, this.aspect, this.nearPlane, this.farPlane);
+    this.vextexArray = [  //0,1,2   0,2,3
+      new THREE.Vector4(-0.5, -0.5, 0, 1),
+      new THREE.Vector4(-0.5, 0.5, 0, 1),
+      new THREE.Vector4(0.5, 0.5, 0, 1),
 
-    console.log('canvas width height!')
-    console.log(this.canvasWidth, this.canvasHeight);
+      new THREE.Vector4(-0.5, -0.5, 0, 1),
+      new THREE.Vector4(0.5, 0.5, 0, 1),
+      new THREE.Vector4(0.5, -0.5, 0, 1),
+    ];
 
-    this.myImageData = this.ctx.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
-    this.clearBackground();
-    
-    
-    this.myImageData.data[0] = 255;
-    this.myImageData.data[3] =255;
-    this.transform = new Transform();
-    this.transform.transform(this.myImageData, this.canvasWidth, this.canvasHeight);
 
-     
-    this.ctx.putImageData(this.myImageData, 0, 0);
-  }
+    const planeMesh = new Mesh();
+    planeMesh.setVerticesList(this.vextexArray);
+    this.scene.add(planeMesh);
 
-  clearBackground () {
-    let count = this.canvasHeight * this.canvasWidth;
-  
-    for (let i = 0; i < count; i++) {
-      this.myImageData.data[i*4+3] = 255;
-    }
+    this.renderer.render(this.scene, this.camera);
+
+   
   }
 
   run() {
-
+   
   }
 
   

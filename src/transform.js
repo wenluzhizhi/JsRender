@@ -72,8 +72,9 @@ class Transform {
           this.drawPoint(myImageData,screenPos.x+i, screenPos.y+j, width);
         }
       }
-      
     }
+   
+    
 
   }
 
@@ -86,11 +87,52 @@ class Transform {
     myImageData.data[redIndex] = 255;
   }
 
-
-
   createProjectMatrix() {
+    let customProjectionMatrix = new THREE.Matrix4();
+    const fovRad = THREE.Math.degToRad(this.cameraFov);
+    const cotFov = -1.0 / Math.tan(fovRad / 2.0);
+    console.log('----fovRad----')
+    console.log(cotFov);
+    const p = (this.nearPlane + this.farPlane) / (this.nearPlane - this.farPlane);
+    const q = (this.farPlane + p * this.farPlane) * -1;
+    console.log(p);
+    console.log(q);
+    customProjectionMatrix.set( // 行优先
+      cotFov / this.aspect, 0, 0, 0,
+      0, cotFov, 0, 0,
+      0, 0, p, q,
+      0, 0, 1, 0,
+    );
+    //console.log(customProjectionMatrix);
+    return customProjectionMatrix;
     const camera = new THREE.PerspectiveCamera(this.cameraFov, this.aspect, this.nearPlane, this.farPlane);
-    return camera.projectionMatrix;
+    let matrix = camera.projectionMatrix.clone();
+    //console.log(matrix);
+    return matrix;
+  }
+
+  checkoutOnePointInTriangle (dotA, dotB, dotC, dotP) {
+    const PA = dotP.clone().sub(dotA);
+    const BA = dotB.clone().sub(dotA);
+    const CA = dotC.clone().sub(dotA);
+
+    const dotPABA = PA.dot(BA);
+    const dotBABA = BA.dot(BA);
+    const dotCABA = CA.dot(BA);
+    const dotPACA = PA.dot(CA);
+    const dotBACA = BA.dot(CA);
+    const dotCACA = CA.dot(CA);
+
+    const sd = dotBABA * dotCACA - dotCABA * dotBACA;
+
+    const sm = dotPABA * dotCACA - dotCABA * dotPACA;
+
+    const sn =   dotBABA * dotPACA - dotPABA * dotBACA;
+
+    const m = sm / sd;
+    const n = sn / sd;
+
+    console.log(m, n);
   }
 
 
