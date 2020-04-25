@@ -5,6 +5,7 @@ class Renderer {
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
     this.myImageData = this.ctx.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
+    this.zBuffer = [];
     this.clearBackground();
     this.screenTrigles = [];
   }
@@ -32,20 +33,25 @@ class Renderer {
         projectionPos.y = projectionPos.y / projectionPos.w;
         projectionPos.z = projectionPos.z / projectionPos.w;
         projectionPos.w = 1.0;
+        console.log(projectionPos);
+        if(Math.abs(projectionPos.x) >1 || Math.abs(projectionPos.y) > 1 || Math.abs(projectionPos.z) >1) {
+          continue;
+        }
         const screenPos = new THREE.Vector3();
         screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
         screenPos.y = parseInt((projectionPos.y + 1) / 2 * this.canvasHeight);
-        screenPos.z = parseInt((projectionPos.z + 1) / 2);
-        mesh.screenTrigles.push(new THREE.Vector2(screenPos.x, screenPos.y));
+        screenPos.z = projectionPos.z;
+        mesh.screenTrigles.push(screenPos);
       }
     }
    
   }
 
   render(scene, camera) {
-    this.clearBackground();
+    this.clearBackground(); 
     this.transformObjectToScreen(scene, camera);
     const list = scene.meshList;
+    this.zBuffer.length = 0; 
     for (let mesh of list){
       const tringlesCount = mesh.screenTrigles.length / 3;
       for (let i= 0; i < tringlesCount; i++) {
@@ -55,6 +61,8 @@ class Renderer {
         const dotAColor = mesh.vertexColor[i * 3];
         const dotBColor = mesh.vertexColor[i * 3 + 1];
         const dotCColor = mesh.vertexColor[i * 3 + 2];
+        //console.log('---------ddfdf------------');
+        //console.log(dotA, dotB, dotC);
         this.drawCanvas (dotA, dotB, dotC, dotAColor, dotBColor, dotCColor);
       }
     }
@@ -64,21 +72,35 @@ class Renderer {
   drawCanvas (dotA, dotB, dotC, dotAColor, dotBColor, dotCColor) {
     for (let i = 0; i < this.canvasWidth; i++){
       for (let j = 0; j < this.canvasHeight; j++){
-          const checkPos = new THREE.Vector2(i, j);
+          const checkPos = new THREE.Vector3(i, j, 0);
           let baryPos = new THREE.Vector3(0.0, 0.0, 0.0);
           if (this.checkoutOnePointInTriangle (dotA, dotB, dotC, checkPos, baryPos)) {
-            this.drawPoint(i, j, dotAColor, dotBColor, dotCColor, baryPos);
+            this.drawPoint(i, j, checkPos.z, dotAColor, dotBColor, dotCColor, baryPos);
           }
       }
     }
   }
 
-  drawPoint(x, y, dotAColor, dotBColor, dotCColor, baryPos) {
+  drawPoint(x, y, depth, dotAColor, dotBColor, dotCColor, baryPos) {
     //console.log(baryPos);
+    
     const flipY = this.canvasHeight - y - 1;
+
+    const zBufferIndex = flipY * this.canvasWidth + x;
+
+   
+    if(this.zBuffer[zBufferIndex] != undefined && this.zBuffer[zBufferIndex] < depth) {
+      //console.log('ztest fail', zBufferIndex, depth);
+      return;
+    }
+    else{
+     // console.log(zBufferIndex, depth);
+      this.zBuffer[zBufferIndex] = depth;
+
+    }
+    
+
     const redIndex = flipY * (this.canvasWidth * 4) + x * 4;
-
-
     const greedIndex = redIndex + 1;
     const blueIndex = greedIndex + 1;
     const alphaIndex = blueIndex + 1;
@@ -121,6 +143,8 @@ class Renderer {
 
     if(m >= 0.0 && n >=0.0 && m+n <= 1.0) {
       baryPos.set(1.0- m - n, m, n);
+      dotP.z = dotA.z * (1.0 - m - n) + dotB.z * m + dotC.z * n;
+      //console.log(dotP.z);
       return true;
     }
     else{

@@ -27,22 +27,22 @@ class CubeMesh extends Mesh {
 
 
       //右面
-      new THREE.Vector4(0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      // new THREE.Vector4(0.5, -0.5, 0.5, 1),
+      // new THREE.Vector4(0.5, 0.5, 0.5, 1),
+      // new THREE.Vector4(0.5, 0.5, -0.5, 1),
 
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(0.5, -0.5, 0.5, 1),
+      // new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      // new THREE.Vector4(0.5, -0.5, -0.5, 1),
+      // new THREE.Vector4(0.5, -0.5, 0.5, 1),
 
-      //左面
-      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      // //左面
+      // new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+      // new THREE.Vector4(-0.5, 0.5, 0.5, 1),
+      // new THREE.Vector4(-0.5, 0.5, -0.5, 1),
 
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+      // new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      // new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      // new THREE.Vector4(-0.5, -0.5, 0.5, 1),
 
 
     ];
@@ -50,9 +50,9 @@ class CubeMesh extends Mesh {
 
     this.vertexColor = [
       //正面 //1,2,3 3,4,1
-      new THREE.Vector3(255, 0, 0),  //0
-      new THREE.Vector3(0, 255, 0),  //1
-      new THREE.Vector3(0, 0, 255),  //2
+      new THREE.Vector3(255, 255, 255),  //0
+      new THREE.Vector3(255, 255, 255),  //1
+      new THREE.Vector3(255, 255, 255),  //2
 
       new THREE.Vector3(255, 0, 0), //3
       new THREE.Vector3(0, 0, 255),   //4

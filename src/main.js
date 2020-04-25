@@ -14,7 +14,7 @@ class App {
     this.scene = new Scene();
 
     this.cameraFov = 60;
-    this.nearPlane = 1;
+    this.nearPlane = 0.1;
     this.farPlane = 100;
     this.aspect = this.canvas.width / this.canvas.height;
     this.camera = new Camera(this.cameraFov, this.aspect, this.nearPlane, this.farPlane);
@@ -45,13 +45,15 @@ class App {
     this.planePosition = new THREE.Vector3(0, 0, 0);
     this.planeQuaternion = new THREE.Quaternion();
     this.planeQuaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0);
-    // this.planeMesh = new Mesh(this.planePosition, this.planeQuaternion);
+    this.planeMesh = new Mesh(this.planePosition, this.planeQuaternion);
     
     // this.planeMesh.setVerticesList(this.vextexArray, this.vextexColorArray);
     // this.scene.add(this.planeMesh);
 
     this.cubeMesh = new CubeMesh(this.planePosition, this.planeQuaternion);
     this.scene.add(this.cubeMesh);
+
+    console.log(this.cubeMesh);
 
 
     this.renderer.render(this.scene, this.camera);
@@ -79,7 +81,7 @@ class App {
 
   run() {
     this.stats.update();
-    this.renderer.render(this.scene, this.camera);
+    //this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(()=>{
       this.run();
     });
