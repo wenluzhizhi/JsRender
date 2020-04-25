@@ -17,6 +17,8 @@ class App {
     this.farPlane = 100;
     this.aspect = this.canvas.width / this.canvas.height;
     this.camera = new Camera(this.cameraFov, this.aspect, this.nearPlane, this.farPlane);
+
+
     this.vextexArray = [  //0,1,2   0,2,3
       new THREE.Vector4(-0.5, -0.5, 0, 1),
       new THREE.Vector4(-0.5, 0.5, 0, 1),
@@ -27,12 +29,28 @@ class App {
       new THREE.Vector4(0.5, -0.5, 0, 1),
     ];
 
+
+    this.vextexColorArray = [
+      new THREE.Vector3(255, 0, 0),  //0
+      new THREE.Vector3(0, 255, 0),  //1
+      new THREE.Vector3(0, 0, 255),  //2
+
+      new THREE.Vector3(255, 0, 0), //3
+      new THREE.Vector3(0, 0, 255),   //4
+      new THREE.Vector3(0, 255, 0)    //5
+    ];
+
+
+
+
+
+
     this.planePosition = new THREE.Vector3(0, 0, 0);
     this.planeQuaternion = new THREE.Quaternion();
     this.planeQuaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0);
     this.planeMesh = new Mesh(this.planePosition, this.planeQuaternion);
     
-    this.planeMesh.setVerticesList(this.vextexArray);
+    this.planeMesh.setVerticesList(this.vextexArray, this.vextexColorArray);
     this.scene.add(this.planeMesh);
 
     this.renderer.render(this.scene, this.camera);
