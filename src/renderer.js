@@ -12,22 +12,21 @@ class Renderer {
   clearBackground () {
     let count = this.canvasHeight * this.canvasWidth;
     for (let i = 0; i < count; i++) {
+      this.myImageData.data[i*4+0] = 0;
+      this.myImageData.data[i*4+1] = 0;
+      this.myImageData.data[i*4+2] = 0;
       this.myImageData.data[i*4+3] = 255;
     }
   }
 
   transformObjectToScreen (scene, camera) {
-    console.log("---------------");
-    console.log(camera);
     const list = scene.meshList;
     this.screenTrigles = [];
     for (let mesh of list) {
       const vertList = mesh.vertList;
       for( let v of vertList) {
         const worldPos = v.clone().applyMatrix4(mesh.modelMatrix);
-        console.log(worldPos);
         const cameraPos = worldPos.applyMatrix4(camera.viewMatrix);
-        console.log(cameraPos);
         const projectionPos = cameraPos.applyMatrix4(camera.projectionMatrix);
         projectionPos.x = projectionPos.x / projectionPos.w;
         projectionPos.y = projectionPos.y / projectionPos.w;
@@ -37,7 +36,6 @@ class Renderer {
         screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
         screenPos.y = parseInt((projectionPos.y + 1) / 2 * this.canvasHeight);
         screenPos.z = parseInt((projectionPos.z + 1) / 2);
-        console.log(screenPos.x, screenPos.y);
         this.screenTrigles.push(new THREE.Vector2(screenPos.x, screenPos.y));
       }
     }
@@ -45,15 +43,13 @@ class Renderer {
   }
 
   render(scene, camera) {
+    this.clearBackground();
     this.transformObjectToScreen(scene, camera);
-    console.log('-----------------start traverse trigles-------------');
     const tringlesCount = this.screenTrigles.length / 3;
-    console.log(tringlesCount);
     for (let i= 0; i < tringlesCount; i++) {
       const dotA = this.screenTrigles[i * 3];
       const dotB = this.screenTrigles[i * 3 + 1];
       const dotC = this.screenTrigles[i * 3 + 2];
-      console.log(dotA, dotB, dotC);
       this.drawCanvas (dotA, dotB, dotC);
     }
     this.ctx.putImageData(this.myImageData, 0, 0);

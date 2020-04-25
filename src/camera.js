@@ -9,7 +9,6 @@ class Camera {
     this.nearPlane = nearPlane;
     this.farPlane = farPlane;
     this.aspect = aspect;
-
     this.udpateViewMatrix();
     this.updateProjectMatrix();
   }
@@ -22,16 +21,20 @@ class Camera {
   }
 
 
+  setCameraMatrix(newCameraMatrix) {
+    this.cameraMatrix.copy(newCameraMatrix);
+    let newScale = new THREE.Vector3(1, 1, 1);
+    this.cameraMatrix.decompose(this.position, this.quaternion, newScale);
+    this.udpateViewMatrix();
+  }
+
+
   updateProjectMatrix() {
     this.projectionMatrix = new THREE.Matrix4();
     const fovRad = THREE.Math.degToRad(this.fov);
     const cotFov = -1.0 / Math.tan(fovRad / 2.0);
-    console.log('----fovRad----')
-    console.log(cotFov);
     const p = (this.nearPlane + this.farPlane) / (this.nearPlane - this.farPlane);
     const q = (this.farPlane + p * this.farPlane) * -1;
-    console.log(p);
-    console.log(q);
     this.projectionMatrix.set( // 行优先
       cotFov / this.aspect, 0, 0, 0,
       0, cotFov, 0, 0,

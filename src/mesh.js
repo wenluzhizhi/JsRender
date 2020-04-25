@@ -1,8 +1,7 @@
 class Mesh{
    constructor(position, quaternion, scale) {
-    this.position = new THREE.Vector3(0, 0, 0);
-    this.quaternion = new THREE.Quaternion();
-    this.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0);
+    this.position = position;
+    this.quaternion = quaternion;
     this.modelMatrix = new THREE.Matrix4();
     this.updateModelMatrix();
    }

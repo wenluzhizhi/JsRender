@@ -91,8 +91,6 @@ class Transform {
     let customProjectionMatrix = new THREE.Matrix4();
     const fovRad = THREE.Math.degToRad(this.cameraFov);
     const cotFov = -1.0 / Math.tan(fovRad / 2.0);
-    console.log('----fovRad----')
-    console.log(cotFov);
     const p = (this.nearPlane + this.farPlane) / (this.nearPlane - this.farPlane);
     const q = (this.farPlane + p * this.farPlane) * -1;
     console.log(p);
