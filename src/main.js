@@ -3,7 +3,8 @@ import {Renderer} from './renderer';
 import {Camera} from './camera';
 import {Scene} from './scene';
 import {Mesh} from './mesh';
-import {CameraController} from './cameracontroller'
+import {CameraController} from './cameracontroller';
+import {CubeMesh} from './cubemesh';
 
 class App {
   constructor (){
@@ -41,17 +42,17 @@ class App {
     ];
 
 
-
-
-
-
     this.planePosition = new THREE.Vector3(0, 0, 0);
     this.planeQuaternion = new THREE.Quaternion();
     this.planeQuaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0);
-    this.planeMesh = new Mesh(this.planePosition, this.planeQuaternion);
+    // this.planeMesh = new Mesh(this.planePosition, this.planeQuaternion);
     
-    this.planeMesh.setVerticesList(this.vextexArray, this.vextexColorArray);
-    this.scene.add(this.planeMesh);
+    // this.planeMesh.setVerticesList(this.vextexArray, this.vextexColorArray);
+    // this.scene.add(this.planeMesh);
+
+    this.cubeMesh = new CubeMesh(this.planePosition, this.planeQuaternion);
+    this.scene.add(this.cubeMesh);
+
 
     this.renderer.render(this.scene, this.camera);
 
