@@ -33,7 +33,7 @@ class Renderer {
         projectionPos.y = projectionPos.y / projectionPos.w;
         projectionPos.z = projectionPos.z / projectionPos.w;
         projectionPos.w = 1.0;
-        console.log(projectionPos);
+        //console.log(projectionPos);
         if(Math.abs(projectionPos.x) >1 || Math.abs(projectionPos.y) > 1 || Math.abs(projectionPos.z) >1) {
           continue;
         }
@@ -58,6 +58,7 @@ class Renderer {
         const dotA = mesh.screenTrigles[i * 3];
         const dotB = mesh.screenTrigles[i * 3 + 1];
         const dotC = mesh.screenTrigles[i * 3 + 2];
+
         const dotAColor = mesh.vertexColor[i * 3];
         const dotBColor = mesh.vertexColor[i * 3 + 1];
         const dotCColor = mesh.vertexColor[i * 3 + 2];

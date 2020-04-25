@@ -27,22 +27,22 @@ class CubeMesh extends Mesh {
 
 
       //右面
-      // new THREE.Vector4(0.5, -0.5, 0.5, 1),
-      // new THREE.Vector4(0.5, 0.5, 0.5, 1),
-      // new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(0.5, 0.5, -0.5, 1),
 
-      // new THREE.Vector4(0.5, 0.5, -0.5, 1),
-      // new THREE.Vector4(0.5, -0.5, -0.5, 1),
-      // new THREE.Vector4(0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(0.5, -0.5, -0.5, 1),
+      new THREE.Vector4(0.5, -0.5, 0.5, 1),
 
-      // //左面
-      // new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-      // new THREE.Vector4(-0.5, 0.5, 0.5, 1),
-      // new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      //左面
+      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
 
-      // new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      // new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-      // new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
 
 
     ];

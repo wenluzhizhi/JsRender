@@ -81,7 +81,7 @@ class App {
 
   run() {
     this.stats.update();
-    //this.renderer.render(this.scene, this.camera);
+    this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(()=>{
       this.run();
     });
