@@ -1,4 +1,4 @@
-class Mesh{
+class Mesh {
    constructor(position, quaternion, scale) {
     this.position = position;
     this.quaternion = quaternion;
