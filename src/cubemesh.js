@@ -5,14 +5,9 @@ class CubeMesh extends Mesh {
   constructor(position, quaternion, scale) {
     super(position, quaternion, scale);
 
-    this.vertIndices =[
-      0,1,2,
-      3,4,5,
-      6,7,8,
-      9,10,11,
-      12,13,14,
-      15, 16, 17
-    ];
+    for(let i=0; i<36;i++) {
+      this.vertIndices.push(i);
+    }
     this.vertList = [
 
       //正面 //1,2,3 3,4,1
@@ -71,8 +66,6 @@ class CubeMesh extends Mesh {
        new THREE.Vector4(0.5, -0.5, -0.5, 1),
        new THREE.Vector4(-0.5, -0.5, -0.5, 1),
  
- 
-
 
     ];
 
@@ -124,7 +117,7 @@ class CubeMesh extends Mesh {
    
          new THREE.Vector3(0, 255, 255), //3
          new THREE.Vector3(0, 40, 255),  //4
-         new THREE.Vector3(0, 255, 255),   //5
+         new THREE.Vector3(0, 255, 255), //5
 
          //下面
          new THREE.Vector3(0, 255, 255),  //0
@@ -137,6 +130,9 @@ class CubeMesh extends Mesh {
  
 
     ];
+
+    super.calculateNormals();
+    console.log(this);
   }
 }
 
