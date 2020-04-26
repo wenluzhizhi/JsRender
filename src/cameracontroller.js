@@ -44,11 +44,18 @@ class CameraController {
     const rotx = offsetPos.x / this.canvasWidth;
     const roty = offsetPos.y / this.canvasHeight;
 
+
+    const cameraMatrix = this.camera.cameraMatrix;
+
+    const up = new THREE.Vector3(cameraMatrix.elements[4], cameraMatrix.elements[5], cameraMatrix.elements[6]);
+    const left = new THREE.Vector3(cameraMatrix.elements[0], cameraMatrix.elements[1], cameraMatrix.elements[2]);
+
+
+
     let rotxMatrix = new THREE.Matrix4();
     let rotxMatriy = new THREE.Matrix4();
-    rotxMatriy.makeRotationAxis(new THREE.Vector3(1, 0, 0), roty);
-    rotxMatrix.makeRotationAxis(new THREE.Vector3(0, 1, 0), rotx);
-    const cameraMatrix = this.camera.cameraMatrix;
+    rotxMatriy.makeRotationAxis(left, -roty);
+    rotxMatrix.makeRotationAxis(up, -rotx);
     rotxMatriy.multiply(rotxMatrix.multiply(cameraMatrix));
     this.camera.setCameraMatrix(rotxMatriy);
   }

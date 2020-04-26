@@ -91,11 +91,9 @@ class Renderer {
 
    
     if(this.zBuffer[zBufferIndex] != undefined && this.zBuffer[zBufferIndex] < depth) {
-      //console.log('ztest fail', zBufferIndex, depth);
       return;
     }
     else{
-     // console.log(zBufferIndex, depth);
       this.zBuffer[zBufferIndex] = depth;
 
     }

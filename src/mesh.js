@@ -10,6 +10,7 @@ class Mesh {
    setVerticesList(list, colorList) {
      this.vertList = list;
      this.vertexColor = colorList;
+     this.vertIndices = [];
    }
 
    updateModelMatrix () {

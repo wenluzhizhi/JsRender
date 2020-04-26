@@ -5,6 +5,14 @@ class CubeMesh extends Mesh {
   constructor(position, quaternion, scale) {
     super(position, quaternion, scale);
 
+    this.vertIndices =[
+      0,1,2,
+      3,4,5,
+      6,7,8,
+      9,10,11,
+      12,13,14,
+      15, 16, 17
+    ];
     this.vertList = [
 
       //正面 //1,2,3 3,4,1
@@ -43,6 +51,27 @@ class CubeMesh extends Mesh {
       new THREE.Vector4(-0.5, 0.5, -0.5, 1),
       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+
+      //上面
+      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(0.5, 0.5, 0.5, 1),
+
+      new THREE.Vector4(0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+
+
+       //下面
+       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+       new THREE.Vector4(0.5, -0.5, 0.5, 1),
+ 
+       new THREE.Vector4(0.5, -0.5, 0.5, 1),
+       new THREE.Vector4(0.5, -0.5, -0.5, 1),
+       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+ 
+ 
 
 
     ];
@@ -86,6 +115,26 @@ class CubeMesh extends Mesh {
         new THREE.Vector3(0, 255, 255), //3
         new THREE.Vector3(0, 255, 255),  //4
         new THREE.Vector3(0, 255, 255),   //5
+
+
+         // 上面
+         new THREE.Vector3(0, 255, 255),  //0
+         new THREE.Vector3(0, 255, 100),  //1
+         new THREE.Vector3(0, 255, 255),  //2
+   
+         new THREE.Vector3(0, 255, 255), //3
+         new THREE.Vector3(0, 40, 255),  //4
+         new THREE.Vector3(0, 255, 255),   //5
+
+         //下面
+         new THREE.Vector3(0, 255, 255),  //0
+         new THREE.Vector3(0, 80, 255),  //1
+         new THREE.Vector3(0, 255, 30),  //2
+   
+         new THREE.Vector3(0, 255, 255), //3
+         new THREE.Vector3(0, 90, 255),  //4
+         new THREE.Vector3(0, 255, 40),   //5
+ 
 
     ];
   }
