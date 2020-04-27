@@ -1,6 +1,6 @@
 
 import { Mesh } from './mesh'
-
+import {Vertex} from './vertex'
 class CubeMesh extends Mesh {
   constructor(position, quaternion, scale) {
     super(position, quaternion, scale);
@@ -69,7 +69,6 @@ class CubeMesh extends Mesh {
 
     ];
 
-
     this.vertexColor = [
       //正面 //1,2,3 3,4,1
       new THREE.Vector3(255, 255, 255),  //0
@@ -130,8 +129,8 @@ class CubeMesh extends Mesh {
  
 
     ];
-
     super.calculateNormals();
+    super.generateMesh();
     console.log(this);
   }
 }

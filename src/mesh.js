@@ -1,3 +1,5 @@
+import {Vertex} from './vertex'
+
 class Mesh {
    constructor(position, quaternion, scale) {
     this.position = position;
@@ -5,6 +7,7 @@ class Mesh {
     this.vertexColor = [];
     this.vertIndices = [];
     this.normalList = [];
+    this.vertexPointList = [];
     this.modelMatrix = new THREE.Matrix4();
     this.updateModelMatrix();
    }
@@ -38,6 +41,15 @@ class Mesh {
        this.normalList.push(normalDot1);
        this.normalList.push(normalDot2);
        this.normalList.push(normalDot3);
+    }
+  }
+
+
+  // 名字待定
+  generateMesh() {
+    for(let i = 0; i < 36; i++) {
+      const v = new Vertex(this.vertList[i], this.vertexColor[i], this.normalList[i],);
+      this.vertexPointList.push(v);
     }
   }
 }
