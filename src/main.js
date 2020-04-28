@@ -71,11 +71,19 @@ class App {
 
 
   addEvent() {
-    document.ontouchstart =document.onmousedown = (event)=> {
-
-    }
-    document.ontouchmove =document.onmousemove = (event)=> {
-
+    document.onkeydown = (event)=> {
+      if(event.keyCode == 65) {
+        const lightDir = this.scene.directionOri;
+        lightDir.applyAxisAngle(new THREE.Vector3(1, 0, 0), 0.01);
+      }
+      if(event.keyCode == 66) {
+        const lightDir = this.scene.directionOri;
+        lightDir.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.01);
+      }
+      if(event.keyCode == 67) {
+        const lightDir = this.scene.directionOri;
+        lightDir.applyAxisAngle(new THREE.Vector3(0, 0, 1), 0.01);
+      }
     }
   }
 

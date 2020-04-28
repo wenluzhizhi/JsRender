@@ -20,15 +20,16 @@ class CubeMesh extends Mesh {
       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
 
       //反面
+
       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
       new THREE.Vector4(-0.5, 0.5, -0.5, 1),
       new THREE.Vector4(0.5, 0.5, -0.5, 1),
 
+
       new THREE.Vector4(0.5, 0.5, -0.5, 1),
       new THREE.Vector4(0.5, -0.5, -0.5, 1),
       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-
-
+     
       //右面
       new THREE.Vector4(0.5, -0.5, 0.5, 1),
       new THREE.Vector4(0.5, 0.5, 0.5, 1),
@@ -39,14 +40,14 @@ class CubeMesh extends Mesh {
       new THREE.Vector4(0.5, -0.5, 0.5, 1),
 
       //左面
-      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
 
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-
+      
       //上面
       new THREE.Vector4(-0.5, 0.5, -0.5, 1),
       new THREE.Vector4(-0.5, 0.5, 0.5, 1),
@@ -58,13 +59,19 @@ class CubeMesh extends Mesh {
 
 
        //下面
+
        new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-       new THREE.Vector4(0.5, -0.5, 0.5, 1),
- 
-       new THREE.Vector4(0.5, -0.5, 0.5, 1),
        new THREE.Vector4(0.5, -0.5, -0.5, 1),
+       new THREE.Vector4(0.5, -0.5, 0.5, 1),
+
+       new THREE.Vector4(0.5, -0.5, 0.5, 1),
+       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
        new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      
+       
+       
+       
+       
  
 
     ];
@@ -120,12 +127,12 @@ class CubeMesh extends Mesh {
 
          //下面
          new THREE.Vector3(0, 255, 255),  //0
-         new THREE.Vector3(0, 80, 255),  //1
-         new THREE.Vector3(0, 255, 30),  //2
+         new THREE.Vector3(0, 255, 100),  //1
+         new THREE.Vector3(0, 255, 255),  //2
    
          new THREE.Vector3(0, 255, 255), //3
-         new THREE.Vector3(0, 90, 255),  //4
-         new THREE.Vector3(0, 255, 40),   //5
+         new THREE.Vector3(0, 40, 255),  //4
+         new THREE.Vector3(0, 255, 255), //5
  
 
     ];

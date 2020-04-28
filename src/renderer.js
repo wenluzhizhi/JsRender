@@ -10,12 +10,7 @@ class Renderer {
     this.screenTrigles = [];
 
     //光照相关的变量， 应该被定义到场景中
-
-    this.ambientColor = new THREE.Vector3(255, 255, 255);
-    this.ambientatend = 0.2;
-    this.directionColor = new THREE.Vector3(255,0, 0);
-    this.directionOri = new THREE.Vector3(0.2, 1, 0);
-    this.directionOri.normalize();
+   
   }
 
   clearBackground () {
@@ -61,6 +56,7 @@ class Renderer {
   }
 
   render(scene, camera) {
+    this.scene = scene;
     this.clearBackground(); 
     this.transformObjectToScreen(scene, camera);
     const list = scene.meshList;
@@ -115,32 +111,31 @@ class Renderer {
     const normal_2 = dotB.normal.clone().multiplyScalar(baryPos.y).normalize();
 
     const normla_3 = dotC.normal.clone().multiplyScalar(baryPos.z).normalize();
-
-
     normal_1.add(normal_2).add(normla_3).normalize();
-
-
-    
-
-    let s = normal_1.dot(this.directionOri);
+    let s = normal_1.dot(this.scene.directionOri);
     if(s < 0.0) {
       s= 0.0;
     }
 
-    let c = this.directionColor.clone().multiplyScalar(s);
+    // 外部光照的颜色 漫反射
+    const diffuse = this.scene.directionColor.clone().multiplyScalar(s);
+    // 环境光
 
-    this.myImageData.data[redIndex] = c.x;
-    this.myImageData.data[greedIndex] = c.y;
-    this.myImageData.data[blueIndex] = c.z;
+    // 顶点本身的颜色
+    const r = dotAColor.x * baryPos.x + dotBColor.x * baryPos.y + dotCColor.x * baryPos.z;
+    const g =  dotAColor.y * baryPos.x + dotBColor.y * baryPos.y + dotCColor.y * baryPos.z;
+    const b = dotAColor.z * baryPos.x + dotBColor.z * baryPos.y + dotCColor.z * baryPos.z;
+    const vertexColor = new THREE.Vector3(r,g, b);
 
-
-    // 颜色插值
-    // this.myImageData.data[redIndex] =
-    //   dotAColor.x * baryPos.x + dotBColor.x * baryPos.y + dotCColor.x * baryPos.z;
-    // this.myImageData.data[greedIndex] =
-    //   dotAColor.y * baryPos.x + dotBColor.y * baryPos.y + dotCColor.y * baryPos.z;
-    // this.myImageData.data[blueIndex] =
-    //   dotAColor.z * baryPos.x + dotBColor.z * baryPos.y + dotCColor.z * baryPos.z;
+    //最终颜色：
+    const color = this.scene.ambientColor.clone().multiplyScalar(0.2).
+    add(diffuse.multiplyScalar(0.6)).add(vertexColor.multiplyScalar(0.2));
+    
+  
+    this.myImageData.data[redIndex] = color.x;
+    this.myImageData.data[greedIndex] =  color.y;
+    this.myImageData.data[blueIndex] =  color.z;
+    
   }
 
   checkoutOnePointInTriangle (dotA, dotB, dotC, dotP, baryPos) {
