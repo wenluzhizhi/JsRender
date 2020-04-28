@@ -136,6 +136,65 @@ class CubeMesh extends Mesh {
  
 
     ];
+
+    this.uvList = [
+      // front
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
+      new THREE.Vector2(1.0, 1.0),
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+
+      // back
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
+      new THREE.Vector2(1.0, 1.0),
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+
+      // right
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
+      new THREE.Vector2(1.0, 1.0),
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+      
+
+      // left
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
+      new THREE.Vector2(1.0, 1.0),
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+
+
+      // top
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
+      new THREE.Vector2(1.0, 1.0),
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+
+      // bootom
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
+      new THREE.Vector2(1.0, 1.0),
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+
+    ];
     super.calculateNormals();
     super.generateMesh();
     console.log(this);

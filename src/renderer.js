@@ -9,7 +9,19 @@ class Renderer {
     this.clearBackground();
     this.screenTrigles = [];
 
-    //光照相关的变量， 应该被定义到场景中
+    var img = new Image();
+    img.src = './1.jpg';
+    img.onload = ()=> {
+      this.imgCanvas = document.getElementById('imgCanvas');
+      var contextImg = this.imgCanvas.getContext('2d');
+      contextImg.drawImage(img, 0, 0, 300, 227);
+      this.imageDataTexture = contextImg.getImageData(0, 0, 300, 227);
+      console.log(this.imageDataTexture);
+
+      this.textureWidth = 300;
+      this.textureHeight = 227;
+    }
+
    
   }
 
@@ -130,11 +142,46 @@ class Renderer {
     //最终颜色：
     const color = this.scene.ambientColor.clone().multiplyScalar(0.2).
     add(diffuse.multiplyScalar(0.6)).add(vertexColor.multiplyScalar(0.2));
+
+    // this.myImageData.data[redIndex] = color.x;
+    // this.myImageData.data[greedIndex] =  color.y;
+    // this.myImageData.data[blueIndex] =  color.z;
     
-  
-    this.myImageData.data[redIndex] = color.x;
-    this.myImageData.data[greedIndex] =  color.y;
-    this.myImageData.data[blueIndex] =  color.z;
+
+    //uv 插值
+
+    const uvx = dotA.uv.x * baryPos.x + dotB.uv.x * baryPos.y + baryPos.z * dotC.uv.x;
+    const uvy = dotA.uv.y * baryPos.x + dotB.uv.y * baryPos.y + baryPos.z * dotC.uv.y;
+
+
+    if (!this.imageDataTexture)
+        return;
+    const result = this.tex2D(uvx, uvy);
+     
+    this.myImageData.data[redIndex] =result[0];
+    this.myImageData.data[greedIndex] =  result[1];
+    this.myImageData.data[blueIndex] =  result[2];
+    this.myImageData.data[alphaIndex] =  result[3];
+    
+  }
+
+
+  tex2D(x, y){
+    const w = parseInt(x * this.textureWidth); 
+    const h = parseInt(y * this.textureHeight); 
+
+    const redIndex = h * (this.textureWidth * 4) + w * 4;
+    const greedIndex = redIndex + 1;
+    const blueIndex = greedIndex + 1;
+    const alphaIndex = blueIndex + 1;
+
+    
+    return [
+      this.imageDataTexture.data[redIndex],
+      this.imageDataTexture.data[greedIndex],
+      this.imageDataTexture.data[blueIndex],
+      this.imageDataTexture.data[alphaIndex],
+    ];
     
   }
 

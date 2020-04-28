@@ -8,6 +8,7 @@ class Mesh {
     this.vertIndices = [];
     this.normalList = [];
     this.vertexPointList = [];
+    this.uvList = [];
     this.modelMatrix = new THREE.Matrix4();
     this.updateModelMatrix();
    }
@@ -48,7 +49,7 @@ class Mesh {
   // 名字待定
   generateMesh() {
     for(let i = 0; i < 36; i++) {
-      const v = new Vertex(this.vertList[i], this.vertexColor[i], this.normalList[i],);
+      const v = new Vertex(this.vertList[i], this.vertexColor[i], this.normalList[i], this.uvList[i]);
       this.vertexPointList.push(v);
     }
   }

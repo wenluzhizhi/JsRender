@@ -67,6 +67,15 @@ class App {
     document.body.appendChild(this.stats.domElement);
 
     this.controls = new CameraController(this.camera, this.canvas);
+
+    
+    
+   
+    // 登录状态下不会出现这行文字，点击页面右上角一键登录
+    // 
+    // 
+   
+    
   }
 
 
