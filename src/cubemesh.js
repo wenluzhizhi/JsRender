@@ -21,14 +21,19 @@ class CubeMesh extends Mesh {
 
       //反面
 
+
+     new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+     new THREE.Vector4(0.5, 0.5, -0.5, 1),
+     new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      
+
+      new THREE.Vector4(0.5, 0.5, -0.5, 1),
       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
-
-
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
       new THREE.Vector4(0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      
+
+
+
      
       //右面
       new THREE.Vector4(0.5, -0.5, 0.5, 1),
@@ -42,31 +47,40 @@ class CubeMesh extends Mesh {
       //左面
 
       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
       new THREE.Vector4(-0.5, 0.5, -0.5, 1),
       new THREE.Vector4(-0.5, 0.5, 0.5, 1),
+      
+
+      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      
       
       //上面
       new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
       new THREE.Vector4(0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
+     
 
       new THREE.Vector4(0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
       new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      
 
 
        //下面
 
        new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-       new THREE.Vector4(0.5, -0.5, -0.5, 1),
-       new THREE.Vector4(0.5, -0.5, 0.5, 1),
-
-       new THREE.Vector4(0.5, -0.5, 0.5, 1),
        new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+       new THREE.Vector4(0.5, -0.5, 0.5, 1),
+      
+      
+
+      new THREE.Vector4(0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(0.5, -0.5, -0.5, 1),
+      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      
+      
       
        
        
@@ -149,12 +163,14 @@ class CubeMesh extends Mesh {
 
       // back
       new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 1.0),
+     
       
       new THREE.Vector2(1.0, 1.0),
-      new THREE.Vector2(1.0, 0.0),
       new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(1.0, 0.0),
+     
 
       // right
       new THREE.Vector2(0.0, 0.0),
@@ -168,22 +184,25 @@ class CubeMesh extends Mesh {
 
       // left
       new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 1.0),
+      
       
       new THREE.Vector2(1.0, 1.0),
-      new THREE.Vector2(1.0, 0.0),
       new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(1.0, 0.0),
+     
 
 
       // top
       new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 1.0),
+      
       
       new THREE.Vector2(1.0, 1.0),
-      new THREE.Vector2(1.0, 0.0),
       new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(1.0, 0.0),
 
       // bootom
       new THREE.Vector2(0.0, 0.0),
@@ -193,6 +212,7 @@ class CubeMesh extends Mesh {
       new THREE.Vector2(1.0, 1.0),
       new THREE.Vector2(1.0, 0.0),
       new THREE.Vector2(0.0, 0.0),
+      
 
     ];
     super.calculateNormals();

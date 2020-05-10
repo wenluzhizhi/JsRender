@@ -79,11 +79,24 @@ class Renderer {
         const dotA = mesh.vertexPointList[i * 3];
         const dotB = mesh.vertexPointList[i * 3 + 1];
         const dotC = mesh.vertexPointList[i * 3 + 2];
-        this.drawCanvas (dotA, dotB, dotC);
+        if (this.faceCulling(dotA, dotB, dotC)) {
+          this.drawCanvas (dotA, dotB, dotC);
+        }
+       
       }
     }
     this.ctx.putImageData(this.myImageData, 0, 0);
   }
+
+  faceCulling(dotA, dotB, dotC) {
+    const dir1 = dotB.screenPos.clone().sub(dotA.screenPos);
+    const dir2 = dotC.screenPos.clone().sub(dotA.screenPos);
+    dir1.cross(dir2);
+    //NDC 坐标系下观察方向是0,0,0
+    //return true;
+    return dir1.dot(new THREE.Vector3(0, 0, 1)) < 0;
+  }
+
 
   drawCanvas (dotA, dotB, dotC) {
     for (let i = 0; i < this.canvasWidth; i++){
