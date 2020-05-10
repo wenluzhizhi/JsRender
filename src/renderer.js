@@ -150,13 +150,26 @@ class Renderer {
 
     //uv 插值
 
-    const uvx = dotA.uv.x * baryPos.x + dotB.uv.x * baryPos.y + baryPos.z * dotC.uv.x;
-    const uvy = dotA.uv.y * baryPos.x + dotB.uv.y * baryPos.y + baryPos.z * dotC.uv.y;
+   
+    
+    // const uvx = dotA.uv.x * baryPos.x + dotB.uv.x * baryPos.y + baryPos.z * dotC.uv.x;
+    // const uvy = dotA.uv.y * baryPos.x + dotB.uv.y * baryPos.y + baryPos.z * dotC.uv.y;
+    // if (!this.imageDataTexture)
+    //   return;
+    // const result = this.tex2D(uvx * depth, uvy * depth);
 
+    const uvx = dotA.uv.x * baryPos.x / dotA.screenPos.z +
+     dotB.uv.x * baryPos.y / dotB.screenPos.z +
+     baryPos.z * dotC.uv.x /dotC.screenPos.z;
+
+
+    const uvy = dotA.uv.y * baryPos.x / dotA.screenPos.z
+       + dotB.uv.y * baryPos.y / dotB.screenPos.z +
+        baryPos.z * dotC.uv.y / dotC.screenPos.z;
 
     if (!this.imageDataTexture)
         return;
-    const result = this.tex2D(uvx, uvy);
+    const result = this.tex2D(uvx * depth, uvy * depth);
      
     this.myImageData.data[redIndex] =result[0];
     this.myImageData.data[greedIndex] =  result[1];
@@ -208,8 +221,12 @@ class Renderer {
 
     if(m >= 0.0 && n >=0.0 && m+n <= 1.0) {
       baryPos.set(1.0- m - n, m, n);
-      dotP.z = dotA.z * (1.0 - m - n) + dotB.z * m + dotC.z * n;
-      //console.log(dotP.z);
+      // 20200510 第一个版本的深度值采用的是投影后的NDC 坐标，现改为透视修正后的深度值
+      //dotP.z = dotA.z * (1.0 - m - n) + dotB.z * m + dotC.z * n;
+      const z = 1.0 / dotA.z * (1.0 - m - n) + 1.0 / dotB.z * m + 1.0 / dotC.z * n;
+      dotP.z = 1.0 / z;
+
+
       return true;
     }
     else{
