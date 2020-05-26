@@ -59,8 +59,15 @@ class Renderer {
 
         // NDC 到 screenPos
         p.screenPos = new THREE.Vector3();
-        p.screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
-        p.screenPos.y = parseInt((projectionPos.y + 1) / 2 * this.canvasHeight);
+
+        //第一次使用了错误的视口映射方法
+        //p.screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
+        //p.screenPos.y = parseInt((projectionPos.y + 1) / 2 * this.canvasHeight);
+        // 正确的映射方法
+        p.screenPos.x = (projectionPos.x + 1) / 2.0 * this.canvasWidth - 0.5;
+        p.screenPos.y = (projectionPos.y + 1) / 2.0 * this.canvasHeight - 0.5; 
+
+
         p.screenPos.z = projectionPos.z;
       }
     }
