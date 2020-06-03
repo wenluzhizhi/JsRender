@@ -11,74 +11,74 @@ class CubeMesh extends Mesh {
     this.vertList = [
 
       //正面 //1,2,3 3,4,1
-      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(-1.0, 1.0, 1.0, 1),
+      new THREE.Vector4(1.0, 1.0, 1.0, 1),
+      new THREE.Vector4(1.0, 1.0, -1.0, 1),
 
-      new THREE.Vector4(0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(-1.0, 1.0, 1.0,  1),
+      new THREE.Vector4(1.0, 1.0, -1.0, 1),
+      new THREE.Vector4(-1.0, 1.0, -1.0, 1),
 
       //反面
 
 
-     new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-     new THREE.Vector4(0.5, 0.5, -0.5, 1),
-     new THREE.Vector4(-0.5, 0.5, -0.5, 1),
+     new THREE.Vector4(-1.0, -1.0, 1.0, 1),
+     new THREE.Vector4(-1.0, -1.0, -1.0, 1),
+     new THREE.Vector4(1.0, -1.0, -1.0, 1),
       
 
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(0.5, -0.5, -0.5, 1),
+      new THREE.Vector4(-1.0, -1.0, 1.0, 1),
+      new THREE.Vector4(1.0, -1.0, -1.0, 1),
+      new THREE.Vector4(1.0, -1.0, 1.0, 1),
       
 
 
 
      
       //右面
-      new THREE.Vector4(0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-1.0, -1.0, -1.0, 1),
+      new THREE.Vector4(-1.0, -1.0, 1.0, 1),
+      new THREE.Vector4(-1.0, 1.0, 1.0, 1),
 
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(0.5, -0.5, 0.5, 1),
+      new THREE.Vector4(-1.0, -1.0, -1.0, 1),
+      new THREE.Vector4(-1.0, 1.0, 1.0, 1),
+      new THREE.Vector4(-1.0, 1.0, -1.0, 1),
 
       //左面
 
-      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(1.0, -1.0, -1.0, 1),
+      new THREE.Vector4(1.0, 1.0, -1.0, 1),
+      new THREE.Vector4(1.0, 1.0, 1.0, 1),
       
 
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      new THREE.Vector4(1.0, -1.0, -1.0, 1),
+      new THREE.Vector4(1.0, 1.0, 1.0, 1),
+      new THREE.Vector4(1.0, -1.0, 1.0, 1),
       
       
       //上面
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, 0.5, 1),
+      new THREE.Vector4(-1.0, -1.0, -1.0, 1),
+      new THREE.Vector4(-1.0, 1.0, -1.0, 1),
+      new THREE.Vector4(1.0, 1.0, -1.0, 1),
      
 
-      new THREE.Vector4(0.5, 0.5, 0.5, 1),
-      new THREE.Vector4(-0.5, 0.5, -0.5, 1),
-      new THREE.Vector4(0.5, 0.5, -0.5, 1),
+      new THREE.Vector4(-1.0, -1.0, -1.0, 1),
+      new THREE.Vector4(1.0, 1.0, -1.0, 1),
+      new THREE.Vector4(1.0, -1.0, -1.0, 1),
       
 
 
        //下面
 
-       new THREE.Vector4(-0.5, -0.5, -0.5, 1),
-       new THREE.Vector4(-0.5, -0.5, 0.5, 1),
-       new THREE.Vector4(0.5, -0.5, 0.5, 1),
+       new THREE.Vector4(-1.0, -1.0, 1.0, 1),
+       new THREE.Vector4(1.0, -1.0, 1.0, 1),
+       new THREE.Vector4(1.0, 1.0, 1.0, 1),
       
       
 
-      new THREE.Vector4(0.5, -0.5, 0.5, 1),
-      new THREE.Vector4(0.5, -0.5, -0.5, 1),
-      new THREE.Vector4(-0.5, -0.5, -0.5, 1),
+      new THREE.Vector4(-1.0, -1.0, 1.0, 1),
+      new THREE.Vector4(1.0, 1.0, 1.0, 1),
+      new THREE.Vector4(-1.0, 1.0, 1.0, 1),
       
       
       
@@ -153,63 +153,63 @@ class CubeMesh extends Mesh {
 
     this.uvList = [
       // front
-      new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
       
-      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 0.0),
       new THREE.Vector2(0.0, 0.0),
 
       // back
       new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(1.0, 1.0),
       new THREE.Vector2(0.0, 1.0),
+      new THREE.Vector2(1.0, 1.0),
      
       
-      new THREE.Vector2(1.0, 1.0),
       new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(1.0, 1.0),
       new THREE.Vector2(1.0, 0.0),
      
 
       // right
-      new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
       
-      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 0.0),
       new THREE.Vector2(0.0, 0.0),
       
 
       // left
-      new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(1.0, 1.0),
-      new THREE.Vector2(0.0, 1.0),
-      
-      
-      new THREE.Vector2(1.0, 1.0),
-      new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+      
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
      
 
 
       // top
-      new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(1.0, 1.0),
-      new THREE.Vector2(0.0, 1.0),
-      
-      
-      new THREE.Vector2(1.0, 1.0),
-      new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(1.0, 0.0),
+      new THREE.Vector2(0.0, 0.0),
+      
+      
+      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.0, 1.0),
 
       // bootom
-      new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(1.0, 0.0),
       
-      new THREE.Vector2(1.0, 1.0),
+      new THREE.Vector2(0.0, 1.0),
       new THREE.Vector2(1.0, 0.0),
       new THREE.Vector2(0.0, 0.0),
       

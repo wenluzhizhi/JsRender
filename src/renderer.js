@@ -10,7 +10,7 @@ class Renderer {
     this.screenTrigles = [];
 
     var img = new Image();
-    img.src = './1.jpg';
+    img.src = './2.jpg';
     img.onload = ()=> {
       this.imgCanvas = document.getElementById('imgCanvas');
       var contextImg = this.imgCanvas.getContext('2d');
@@ -59,8 +59,10 @@ class Renderer {
 
         // NDC 到 screenPos
         p.screenPos = new THREE.Vector3();
-        p.screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
-        p.screenPos.y = parseInt((projectionPos.y + 1) / 2 * this.canvasHeight);
+        // p.screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
+        // p.screenPos.y = parseInt((projectionPos.y + 1) / 2 * this.canvasHeight);
+        p.screenPos.x = (projectionPos.x + 1) / 2 * this.canvasWidth - 0.5;
+        p.screenPos.y = (projectionPos.y + 1) / 2 * this.canvasHeight - 0.5;
         p.screenPos.z = projectionPos.z;
       }
     }
@@ -74,7 +76,8 @@ class Renderer {
     const list = scene.meshList;
     this.zBuffer.length = 0; 
     for (let mesh of list){
-      const tringlesCount = mesh.vertIndices.length / 3;
+      let tringlesCount = mesh.vertIndices.length / 3;
+      //tringlesCount = 2;
       for (let i= 0; i < tringlesCount; i++) {
         const dotA = mesh.vertexPointList[i * 3];
         const dotB = mesh.vertexPointList[i * 3 + 1];
@@ -94,7 +97,7 @@ class Renderer {
     dir1.cross(dir2);
     //NDC 坐标系下观察方向是0,0,0
     //return true;
-    return dir1.dot(new THREE.Vector3(0, 0, 1)) < 0;
+    return dir1.dot(new THREE.Vector3(0, 0, 1)) > 0;
   }
 
 
@@ -169,7 +172,7 @@ class Renderer {
     // const uvy = dotA.uv.y * baryPos.x + dotB.uv.y * baryPos.y + baryPos.z * dotC.uv.y;
     // if (!this.imageDataTexture)
     //   return;
-    // const result = this.tex2D(uvx * depth, uvy * depth);
+    // const result = this.tex2D(uvx, uvy);
 
     const uvx = dotA.uv.x * baryPos.x / dotA.screenPos.z +
      dotB.uv.x * baryPos.y / dotB.screenPos.z +
@@ -193,8 +196,8 @@ class Renderer {
 
 
   tex2D(x, y){
-    const w = parseInt(x * this.textureWidth); 
-    const h = parseInt(y * this.textureHeight); 
+    const w = Math.floor(x * this.textureWidth); 
+    const h = Math.floor(y * this.textureHeight); 
 
     const redIndex = h * (this.textureWidth * 4) + w * 4;
     const greedIndex = redIndex + 1;

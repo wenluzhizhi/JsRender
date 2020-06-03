@@ -2,9 +2,9 @@ class Camera {
 
 
   constructor(fov, aspect, nearPlane, farPlane) {
-    this.position = new THREE.Vector3(0, 0, 7);
+    this.position = new THREE.Vector3(2, 0, 2);
     this.quaternion = new THREE.Quaternion();
-    this.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), 0.0);
+    this.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI/4);
     this.fov = fov;
     this.nearPlane = nearPlane;
     this.farPlane = farPlane;
