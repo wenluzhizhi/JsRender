@@ -51,14 +51,14 @@ class Renderer {
         projectionPos.x = projectionPos.x / projectionPos.w;
         projectionPos.y = projectionPos.y / projectionPos.w;
         projectionPos.z = projectionPos.z / projectionPos.w;
-        projectionPos.w = 1.0;
+        //projectionPos.w = 1.0;
         //console.log(projectionPos);
         // if(Math.abs(projectionPos.x) >1 || Math.abs(projectionPos.y) > 1 || Math.abs(projectionPos.z) >1) {
         //   continue;
         // }
 
         // NDC 到 screenPos
-        p.screenPos = new THREE.Vector3();
+        p.screenPos = new THREE.Vector4();
 
         //第一次使用了错误的视口映射方法
         //p.screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
@@ -66,9 +66,8 @@ class Renderer {
         // 正确的映射方法
         p.screenPos.x = (projectionPos.x + 1) / 2.0 * this.canvasWidth - 0.5;
         p.screenPos.y = (projectionPos.y + 1) / 2.0 * this.canvasHeight - 0.5; 
-
-
         p.screenPos.z = projectionPos.z;
+        p.screenPos.w = projectionPos.w;
       }
     }
    
@@ -96,8 +95,12 @@ class Renderer {
   }
 
   faceCulling(dotA, dotB, dotC) {
-    const dir1 = dotB.screenPos.clone().sub(dotA.screenPos);
-    const dir2 = dotC.screenPos.clone().sub(dotA.screenPos);
+    const dir1_v4 = dotB.screenPos.clone().sub(dotA.screenPos);
+    const dir2_v4 = dotC.screenPos.clone().sub(dotA.screenPos);
+
+    const dir1 = new THREE.Vector3(dir1_v4.x, dir1_v4.y, dir1_v4.z);
+    const dir2 = new THREE.Vector3(dir2_v4.x, dir2_v4.y, dir2_v4.z);
+
     dir1.cross(dir2);
     //NDC 坐标系下观察方向是0,0,0
     //return true;
@@ -178,19 +181,34 @@ class Renderer {
     //   return;
     // const result = this.tex2D(uvx * depth, uvy * depth);
 
-    const uvx = dotA.uv.x * baryPos.x / dotA.screenPos.z +
-     dotB.uv.x * baryPos.y / dotB.screenPos.z +
-     baryPos.z * dotC.uv.x /dotC.screenPos.z;
+    // const uvx = dotA.uv.x * baryPos.x / dotA.screenPos.z +
+    //  dotB.uv.x * baryPos.y / dotB.screenPos.z +
+    //  baryPos.z * dotC.uv.x /dotC.screenPos.z;
 
 
-    const uvy = dotA.uv.y * baryPos.x / dotA.screenPos.z
-       + dotB.uv.y * baryPos.y / dotB.screenPos.z +
-        baryPos.z * dotC.uv.y / dotC.screenPos.z;
+    // const uvy = dotA.uv.y * baryPos.x / dotA.screenPos.z
+    //    + dotB.uv.y * baryPos.y / dotB.screenPos.z +
+    //     baryPos.z * dotC.uv.y / dotC.screenPos.z;
+
+    // if (!this.imageDataTexture)
+    //     return;
+    // const result = this.tex2D(uvx * depth, uvy * depth);
+
+    // 正确的UV插值算法
+    const ow = baryPos.x / dotA.screenPos.w + baryPos.y / dotB.screenPos.w +  baryPos.z / dotC.screenPos.w;
+    const uvx = dotA.uv.x * baryPos.x / dotA.screenPos.w +
+     dotB.uv.x * baryPos.y / dotB.screenPos.w +
+     baryPos.z * dotC.uv.x /dotC.screenPos.w;
+
+    const uvy = dotA.uv.y * baryPos.x / dotA.screenPos.w
+       + dotB.uv.y * baryPos.y / dotB.screenPos.w +
+        baryPos.z * dotC.uv.y / dotC.screenPos.w;
 
     if (!this.imageDataTexture)
         return;
-    const result = this.tex2D(uvx * depth, uvy * depth);
-     
+    const result = this.tex2D(uvx / ow, uvy / ow);
+
+
     this.myImageData.data[redIndex] =result[0];
     this.myImageData.data[greedIndex] =  result[1];
     this.myImageData.data[blueIndex] =  result[2];
