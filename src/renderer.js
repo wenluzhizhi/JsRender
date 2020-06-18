@@ -59,8 +59,6 @@ class Renderer {
 
         // NDC 到 screenPos
         p.screenPos = new THREE.Vector4();
-
-
         //第一次使用了错误的视口映射方法
         //p.screenPos.x = parseInt((projectionPos.x + 1) / 2 * this.canvasWidth);
         //p.screenPos.y = parseInt((projectionPos.y + 1) / 2 * this.canvasHeight);
@@ -87,7 +85,7 @@ class Renderer {
         const dotB = mesh.vertexPointList[i * 3 + 1];
         const dotC = mesh.vertexPointList[i * 3 + 2];
         if (this.faceCulling(dotA, dotB, dotC)) {
-          this.drawCanvas (dotA, dotB, dotC);
+          this.drawTriangle (dotA, dotB, dotC);
         }
        
       }
@@ -100,6 +98,7 @@ class Renderer {
     const dir2_v4 = dotC.screenPos.clone().sub(dotA.screenPos);
     const dir1 = new THREE.Vector3(dir1_v4.x, dir1_v4.y, dir1_v4.z);
     const dir2 = new THREE.Vector3(dir2_v4.x, dir2_v4.y, dir2_v4.z);
+
     dir1.cross(dir2);
     //NDC 坐标系下观察方向是0,0,0
     //return true;
@@ -107,9 +106,19 @@ class Renderer {
   }
 
 
-  drawCanvas (dotA, dotB, dotC) {
-    for (let i = 0; i < this.canvasWidth; i++){
-      for (let j = 0; j < this.canvasHeight; j++){
+  drawTriangle (dotA, dotB, dotC) {
+
+    const minX = Math.min(Math.floor(dotA.screenPos.x), Math.min(Math.floor(dotB.screenPos.x), Math.floor(dotC.screenPos.x)));
+    const maxX = Math.max(Math.ceil(dotA.screenPos.x), Math.max(Math.ceil(dotB.screenPos.x), Math.ceil(dotC.screenPos.x)));
+
+    const minY = Math.min(Math.floor(dotA.screenPos.y), Math.min(Math.floor(dotB.screenPos.y), Math.floor(dotC.screenPos.y)));
+    const maxY = Math.max(Math.ceil(dotA.screenPos.y), Math.max(Math.ceil(dotB.screenPos.y), Math.ceil(dotC.screenPos.y)));
+
+    
+
+
+    for (let i = minX; i < maxX; i++){
+      for (let j = minY; j < maxY; j++){
           const checkPos = new THREE.Vector3(i, j, 0);
           let baryPos = new THREE.Vector3(0.0, 0.0, 0.0);
           if (this.checkoutOnePointInTriangle (dotA.screenPos, dotB.screenPos, dotC.screenPos, checkPos, baryPos)) {
@@ -184,13 +193,18 @@ class Renderer {
     //  dotB.uv.x * baryPos.y / dotB.screenPos.z +
     //  baryPos.z * dotC.uv.x /dotC.screenPos.z;
 
+    // const uvy = dotA.uv.y * baryPos.x / dotA.screenPos.z
+    //    + dotB.uv.y * baryPos.y / dotB.screenPos.z +
+    //     baryPos.z * dotC.uv.y / dotC.screenPos.z;
 
     // const uvy = dotA.uv.y * baryPos.x / dotA.screenPos.z
     //    + dotB.uv.y * baryPos.y / dotB.screenPos.z +
     //     baryPos.z * dotC.uv.y / dotC.screenPos.z;
 
-    // const result = this.tex2D(uvx * depth, uvy *depth);
-  
+    // if (!this.imageDataTexture)
+    //     return;
+    // const result = this.tex2D(uvx * depth, uvy * depth);
+
     // 正确的UV插值算法
     const ow = baryPos.x / dotA.screenPos.w + baryPos.y / dotB.screenPos.w +  baryPos.z / dotC.screenPos.w;
     const uvx = dotA.uv.x * baryPos.x / dotA.screenPos.w +
@@ -204,9 +218,6 @@ class Renderer {
     if (!this.imageDataTexture)
         return;
     const result = this.tex2D(uvx / ow, uvy / ow);
-
-
-
     this.myImageData.data[redIndex] =result[0];
     this.myImageData.data[greedIndex] =  result[1];
     this.myImageData.data[blueIndex] =  result[2];

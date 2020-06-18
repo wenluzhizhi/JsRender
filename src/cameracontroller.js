@@ -16,7 +16,7 @@ class CameraController {
       if(this.isMoving) {
         const offsetPos = new THREE.Vector2(event.touches[0].clientX - this.mosueStartPos.x,
            event.touches[0].clientY - this.mosueStartPos.y);
-        this.rotateCamera(offsetPos);
+        this.rotateCamera(offsetPos.multiplyScalar(3));
         this.mosueStartPos.set(event.touches[0].clientX, event.touches[0].clientY);
       }
     }
