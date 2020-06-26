@@ -5,8 +5,11 @@ class Renderer {
   constructor (canvs) {
     this.canvas = canvs;
     this.ctx = this.canvas.getContext('2d');
+    
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
+    console.log('this.canvasWidth:' + this.canvasWidth);
+    console.log('this.canvasHeight:' + this.canvasHeight);
     this.myImageData = this.ctx.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
     this.zBuffer = [];
     this.clearBackground();
