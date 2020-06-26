@@ -14,7 +14,7 @@ class App {
     this.scene = new Scene();
 
     this.cameraFov = 60;
-    this.nearPlane = 0.1;
+    this.nearPlane = 1;
     this.farPlane = 100;
     this.aspect = this.canvas.width / this.canvas.height;
     this.camera = new Camera(this.cameraFov, this.aspect, this.nearPlane, this.farPlane);
