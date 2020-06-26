@@ -41,6 +41,7 @@ class CameraController {
     const cameraMatrix = this.camera.cameraMatrix.clone();
     cameraMatrix.multiply(moveMatrix);
     this.camera.setCameraMatrix(cameraMatrix);
+    //console.log(this.camera.position);
   }
 
   rotateCamera(offsetPos) {

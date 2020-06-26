@@ -210,7 +210,7 @@ class Renderer {
     if (!this.imageDataTexture)
         return;
     const result = this.tex2D(uvx / ow, uvy / ow);
-    this.myImageData.data[redIndex] =result[0];
+    this.myImageData.data[redIndex] = result[0];
     this.myImageData.data[greedIndex] =  result[1];
     this.myImageData.data[blueIndex] =  result[2];
     this.myImageData.data[alphaIndex] =  result[3];
@@ -219,8 +219,11 @@ class Renderer {
 
 
   tex2D(x, y){
+    x = Math.abs(x % 1) ;
+    y =  Math.abs(y % 1);
     const w = parseInt(x * this.textureWidth); 
     const h = parseInt(y * this.textureHeight); 
+
 
     const redIndex = h * (this.textureWidth * 4) + w * 4;
     const greedIndex = redIndex + 1;
