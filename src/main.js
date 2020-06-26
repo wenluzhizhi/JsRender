@@ -9,7 +9,11 @@ import {CubeMesh} from './cubemesh';
 class App {
   constructor (){
     console.log('this is App constructor!');
+
+    this.mainDiv = document.getElementById('mainDiv');
     this.canvas = document.getElementById('canvas');
+    this.canvas.width = this.mainDiv.clientWidth;
+    this.canvas.height = this.mainDiv.clientHeight;
     this.renderer = new Renderer(this.canvas);
     this.scene = new Scene();
 

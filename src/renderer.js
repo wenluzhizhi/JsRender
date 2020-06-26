@@ -5,8 +5,11 @@ class Renderer {
   constructor (canvs) {
     this.canvas = canvs;
     this.ctx = this.canvas.getContext('2d');
+    
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
+    console.log('this.canvasWidth:' + this.canvasWidth);
+    console.log('this.canvasHeight:' + this.canvasHeight);
     this.myImageData = this.ctx.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
     this.zBuffer = [];
     this.clearBackground();
@@ -112,10 +115,8 @@ class Renderer {
     const dir2_v4 = dotC.screenPos.clone().sub(dotA.screenPos);
     const dir1 = new THREE.Vector3(dir1_v4.x, dir1_v4.y, dir1_v4.z);
     const dir2 = new THREE.Vector3(dir2_v4.x, dir2_v4.y, dir2_v4.z);
-
     dir1.cross(dir2);
     //NDC 坐标系下观察方向是0,0,0
-    //return true;
     return dir1.dot(new THREE.Vector3(0, 0, 1)) < 0;
   }
 
